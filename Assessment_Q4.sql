@@ -12,7 +12,7 @@ FROM (
         U.id,
         CONCAT(U.first_name, ' ', U.last_name) AS name,
         U.date_joined,
-        TIMESTAMPDIFF(MONTH, U.date_joined, NOW()) AS tenure_months, -- tenure is calculated from today, i.e., Number of months since the user joined
+        TIMESTAMPDIFF(MONTH, U.date_joined, CURDATE()) AS tenure_months, -- tenure is calculated from today, i.e., Number of months since the user joined
         COUNT(*) AS total_transactions,-- Total number of successful transactions
         ROUND(AVG(S.confirmed_amount) / 0.001, 2) AS avg_profit_per_transaction -- Estimated profit: assuming the profit_per_transaction is 0.1% of the transaction value
     FROM 
